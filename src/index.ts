@@ -2,7 +2,7 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 
 const getVersion = async (version: RegExpMatchArray): Promise<Version> => {
-    console.log("version:", version);
+    
     return {
         major: parseInt(version[1]),
         minor: parseInt(version[2]),
@@ -16,23 +16,25 @@ const getVersion = async (version: RegExpMatchArray): Promise<Version> => {
 
 async function run() {
     try {
-        const event = github.context.eventName;
-        if (event !== "create"){
-            core.setFailed("This action is only meant to be run on create");
+        const event = github.context.eventName;        
+        if (event !== "create" && event !== "push" && event !== "pull_request") {
+            core.setFailed("This action is only meant to be run on create, push and pull_request");
             return;
         }
         const refType = github.context.payload.ref_type;
-        if (refType !== "branch"){
-            core.setFailed("This action is only meant to be run on the creation of a new branch");
-            return;
-        }
-
+        
+        
         // Grab the branch version
-        const branchName: string = github.context.payload.ref;        
-        // const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})\.(\d{1,2})$/);
-        const regex = new RegExp(/^release[-\/](\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?$/);
+        let branchName: string = ""
+        if (event === "push" || event === "create") {
+            branchName = github.context.payload.ref;
+        } else if (event === "pull_request") {
+            branchName = github.context.payload.pull_request?.base.ref || "";
+        }        
+        
+        const regex = new RegExp(/^(?:refs\/heads\/)?release[-\/](\d{1,5})\.(\d{1,5})(?:\.(\d{1,5}))?$/);        
         const releaseInfo = branchName.match(regex);
-        console.log("releaseInfo: ", releaseInfo);
+        
 
         if (releaseInfo) {
             const major = parseInt(releaseInfo[1], 10);

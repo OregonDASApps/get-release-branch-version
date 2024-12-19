@@ -15,17 +15,25 @@ This action should only be run on release branches. Here is a suggested usage wi
 
 ```yaml
 name: Get release branch
-on: create
+on: 
+  push:
+    branches:
+      - 'release/**'
+  pull_request:
+    branches:
+      - 'release/**'
+  workflow_dispatch:
+  create:
 
 jobs:
   get-release:
     name: Get the release branch version number
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - uses: snsinahub-org/get-release-branch-version@v2.0.0
+      - uses: snsinahub-org/get-release-branch-version@v3.0.0
         id: branchVersion
       - name: Dump the version info
         run: | 
