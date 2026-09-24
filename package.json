@@ -5,7 +5,7 @@
   "description": "Gets the version number of a release branch",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "ncc build src/index.ts -o dist --license licenses.txt",
+    "build": "ncc build src/index.ts -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,10 +27,6 @@
   "homepage": "https://github.com/valadas/get-release-branch-version#readme",
   "engines": {
     "node": ">=24"
-  },
-  "dependencies": {
-    "@actions/core": "^3.0.1",
-    "@actions/github": "^9.1.1"
   },
   "devDependencies": {
     "@types/node": "^24.13.6",
