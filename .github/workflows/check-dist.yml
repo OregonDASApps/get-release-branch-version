@@ -2,23 +2,13 @@ name: Check dist
 
 # The action runs the committed dist/index.js as-is, so it must always be
 # rebuilt from src/ and committed. This workflow fails if dist/ is stale.
+# It runs on every push to main and every pull request (no path filter) so a
+# manually edited or tampered dist/ is caught even when src/ is untouched.
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'src/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'tsconfig.json'
-      - '.github/workflows/check-dist.yml'
   pull_request:
-    paths:
-      - 'src/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'tsconfig.json'
-      - '.github/workflows/check-dist.yml'
   workflow_dispatch:
 
 jobs:
