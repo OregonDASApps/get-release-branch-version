@@ -13,5 +13,5 @@ outputs:
   versionString:
     description: 'The version string such as 1.2.3 in release/1.2.3'
 runs:
-  using: 'node20'
+  using: 'node24'
   main: './dist/index.js'
