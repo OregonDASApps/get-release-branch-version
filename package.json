@@ -5,7 +5,7 @@
   "description": "Gets the version number of a release branch",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "ncc build src/index.ts -o dist --license licenses.txt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.13.6",
+    "@vercel/ncc": "^0.45.0",
     "typescript": "^5.9.3"
   }
 }
