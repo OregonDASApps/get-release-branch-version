@@ -72,5 +72,5 @@ Ex: Creating a **release/1.2.3** branch would output:
 
 ## Note
 
-This action is a clone of the [valadas/get-branch-version](https://github.com/valadas/get-release-branch-version) action. This action introduces a new output and is upgraded the node version to 20.
+This action is a clone of the [valadas/get-branch-version](https://github.com/valadas/get-release-branch-version) action. This action introduces a new output and upgrades the Node.js version to 24.
 

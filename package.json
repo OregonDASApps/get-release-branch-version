@@ -1,10 +1,11 @@
 {
   "name": "get-release-branch-version",
   "version": "1.0.0",
+  "type": "module",
   "description": "Gets the version number of a release branch",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "ncc build src/index.ts -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,12 +25,12 @@
     "url": "https://github.com/valadas/get-release-branch-version/issues"
   },
   "homepage": "https://github.com/valadas/get-release-branch-version#readme",
-  "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0"
+  "engines": {
+    "node": ">=24"
   },
-"devDependencies": {
-    "@types/node": "^22.10.1",
-    "typescript": "^5.7.2"
+  "devDependencies": {
+    "@types/node": "^24.13.6",
+    "@vercel/ncc": "^0.45.0",
+    "typescript": "^5.9.3"
   }
 }
